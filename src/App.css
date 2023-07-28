@@ -1,3 +1,3 @@
 .transitionWrapper  * {
-  @apply transition-all duration-200 ease-in-out;
+  @apply transition-all duration-150 ease-in-out;
 }
