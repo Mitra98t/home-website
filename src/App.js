@@ -9,10 +9,10 @@ import { twMerge } from "tailwind-merge";
 import Icon from "./components/Icon";
 
 const defaultSettings = {
-  theme: "dark",
+  theme: "retro",
   aesthetics: {
     rounded: true,
-    bordered: false,
+    bordered: true,
     shadowed: false,
   },
 };
@@ -24,17 +24,19 @@ function App() {
   return (
     <div
       data-theme={currentTheme.theme}
-      className="w-full h-screen grid place-items-center text-primary-content transitionWrapper"
+      className="w-full h-screen grid place-items-center text-primary-content transitionWrapper "
     >
       {themeSelector(currentTheme, setCurrentTheme, showMenu, setShowMenu)}
       <div
         className={twMerge(
-          " w-3/5 md:w-2/5 lg:w-1/3 xl:w-2/3 h-fit xl:h-1/2 overflow-hidden flex flex-col xl:flex-row",
-          currentTheme.aesthetics.rounded && "rounded-3xl"
+          " w-3/5 md:w-2/5 lg:w-1/3 xl:w-2/3 h-fit xl:h-1/2 overflow-hidden flex flex-col xl:flex-row border-primary-content",
+          currentTheme.aesthetics.rounded && "rounded-3xl",
+            currentTheme.aesthetics.bordered && "border-2",
+            currentTheme.aesthetics.shadowed && "shadow-lg"
         )}
       >
         <PrimaryImage />
-        <PrimarySection />
+        <PrimarySection currentTheme={currentTheme}/>
       </div>
     </div>
   );
@@ -60,8 +62,10 @@ function themeSelector(currentTheme, setCurrentTheme, showMenu, setShowMenu) {
       >
         <div
           className={twMerge(
-            "relative w-full h-full p-4 text-primary-content flex flex-col gap-4 accent-accent bg-primary",
-            currentTheme.aesthetics.rounded && "rounded-2xl"
+            "relative w-full h-full p-4 text-primary-content flex flex-col gap-4 accent-accent bg-primary border-primary-content",
+            currentTheme.aesthetics.rounded && "rounded-2xl",
+              currentTheme.aesthetics.bordered && "border-2",
+            currentTheme.aesthetics.shadowed && "shadow-lg"
           )}
         >
           <button
@@ -73,8 +77,9 @@ function themeSelector(currentTheme, setCurrentTheme, showMenu, setShowMenu) {
           <h1 className="text-lg font-semibold pr-12">Theme Selector</h1>
           <select
             className={twMerge(
-              "bg-primary-focus px-2 py-1 ",
-              currentTheme.aesthetics.rounded && "rounded-full"
+              "bg-primary-focus px-2 py-1 border-primary-content",
+              currentTheme.aesthetics.rounded && "rounded-full",
+              currentTheme.aesthetics.bordered && "border-2"
             )}
             onChange={(e) => {
               let oldTheme = { ...currentTheme };
@@ -97,6 +102,7 @@ function themeSelector(currentTheme, setCurrentTheme, showMenu, setShowMenu) {
                 <div className="flex flex-row items-center justify-start gap-2">
                   <input
                     type="checkbox"
+                    checked={currentTheme.aesthetics[key]}
                     className={twMerge(
                       "checkbox-sm ",
                       currentTheme.aesthetics.rounded && "rounded-sm"
