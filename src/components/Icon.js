@@ -4,6 +4,7 @@ import { twMerge } from "tailwind-merge";
 export default function Icon({
   iconName,
   strokeColor = "stroke-primary-content",
+  height = "h-8",
 }) {
   const getIcon = (iconName) => {
     switch (iconName) {
@@ -23,16 +24,30 @@ export default function Icon({
             d="M6 18L18 6M6 6l12 12"
           />
         );
+      case "arrowLeft":
+        return (
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M15.75 19.5L8.25 12l7.5-7.5"
+          />
+        );
+      case "arrowRight":
+        return (
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M8.25 4.5l7.5 7.5-7.5 7.5"
+          />
+        );
+
       default:
         return <></>;
     }
   };
   return (
     <svg
-      className={twMerge(
-        " fill-primary-content stroke-2 h-8 aspect-square",
-        strokeColor
-      )}
+      className={twMerge("stroke-2 fill-none aspect-square", strokeColor, height)}
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"

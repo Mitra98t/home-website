@@ -7,6 +7,7 @@ import { themes } from "./utils";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import Icon from "./components/Icon";
+import BackgroundImage from "./components/BackgroundImage";
 
 const defaultSettings = {
   theme: "retro",
@@ -14,6 +15,8 @@ const defaultSettings = {
     rounded: true,
     bordered: true,
     shadowed: false,
+    showImageAsBackground: false,
+    blurredBackground: false,
   },
 };
 
@@ -24,19 +27,23 @@ function App() {
   return (
     <div
       data-theme={currentTheme.theme}
-      className="w-full h-screen grid place-items-center text-primary-content transitionWrapper "
+      className={twMerge(
+        "relative w-full h-screen grid place-items-center text-primary-content overflow-hidden transitionWrapper ",
+        currentTheme.aesthetics.showImageAsBackground && "bg-transparent "
+      )}
     >
+      <BackgroundImage currentTheme={currentTheme} />
       {themeSelector(currentTheme, setCurrentTheme, showMenu, setShowMenu)}
       <div
         className={twMerge(
           " w-3/5 md:w-2/5 lg:w-1/3 xl:w-2/3 h-fit xl:h-1/2 overflow-hidden flex flex-col xl:flex-row border-primary-content",
           currentTheme.aesthetics.rounded && "rounded-3xl",
-            currentTheme.aesthetics.bordered && "border-2",
-            currentTheme.aesthetics.shadowed && "shadow-lg"
+          currentTheme.aesthetics.bordered && "border-2",
+          currentTheme.aesthetics.shadowed && "shadow-lg"
         )}
       >
         <PrimaryImage />
-        <PrimarySection currentTheme={currentTheme}/>
+        <PrimarySection currentTheme={currentTheme} />
       </div>
     </div>
   );
@@ -64,7 +71,7 @@ function themeSelector(currentTheme, setCurrentTheme, showMenu, setShowMenu) {
           className={twMerge(
             "relative w-full h-full p-4 text-primary-content flex flex-col gap-4 accent-accent bg-primary border-primary-content",
             currentTheme.aesthetics.rounded && "rounded-2xl",
-              currentTheme.aesthetics.bordered && "border-2",
+            currentTheme.aesthetics.bordered && "border-2",
             currentTheme.aesthetics.shadowed && "shadow-lg"
           )}
         >
