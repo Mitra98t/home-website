@@ -110,7 +110,7 @@ function WebsiteCard({ name, url }) {
       rel="noreferrer"
     >
       <div className="group-hover:hidden block">
-        <Icon iconName="arrowLeft" height="h-5" />
+        <Icon iconName="arrowLeft" height="h-5"  />
       </div>
       <div className="group-hover:block hidden">
         <Icon iconName="arrowRight" height="h-5" />

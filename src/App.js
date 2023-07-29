@@ -59,7 +59,16 @@ function themeSelector(currentTheme, setCurrentTheme, showMenu, setShowMenu) {
         )}
         onClick={() => setShowMenu(!showMenu)}
       >
-        <Icon iconName={"menu"} strokeColor="stroke-base-content" />
+        <Icon
+          iconName={"menu"}
+          leaveBackground={currentTheme.aesthetics.showImageAsBackground}
+          additionalCss={twMerge(
+            currentTheme.aesthetics.showImageAsBackground && currentTheme.aesthetics.rounded && "rounded-full",
+            currentTheme.aesthetics.showImageAsBackground && currentTheme.aesthetics.shadowed && "shadow-md",
+            currentTheme.aesthetics.showImageAsBackground && currentTheme.aesthetics.bordered &&
+              "border-2 border-primary-content"
+          )}
+        />
       </button>
       <div
         className={twMerge(

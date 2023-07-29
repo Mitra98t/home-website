@@ -5,6 +5,8 @@ export default function Icon({
   iconName,
   strokeColor = "stroke-primary-content",
   height = "h-8",
+  leaveBackground = false,
+  additionalCss = "",
 }) {
   const getIcon = (iconName) => {
     switch (iconName) {
@@ -46,13 +48,25 @@ export default function Icon({
     }
   };
   return (
-    <svg
-      className={twMerge("stroke-2 fill-none aspect-square", strokeColor, height)}
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
+    <div
+      className={twMerge(
+        "flex flex-row p-2",
+        additionalCss,
+        leaveBackground && "bg-secondary-focus"
+      )}
     >
-      {getIcon(iconName)}
-    </svg>
+      <svg
+        className={twMerge(
+          "stroke-2 fill-none aspect-square",
+          strokeColor,
+          height
+        )}
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        {getIcon(iconName)}
+      </svg>
+    </div>
   );
 }
